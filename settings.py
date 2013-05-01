@@ -10,6 +10,7 @@
 # of settings Mezzanine implements:
 # http://mezzanine.jupo.org/docs/configuration.html#default-settings
 
+
 # Controls the ordering and grouping of the admin menu.
 #
 # ADMIN_MENU_ORDER = (
@@ -223,6 +224,7 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 ################
 
 INSTALLED_APPS = (
+    "mezzanine_themes.coworker",
     "mezzanine_themes.business",
     "django.contrib.admin",
     "django.contrib.auth",
