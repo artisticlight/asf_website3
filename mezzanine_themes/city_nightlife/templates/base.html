@@ -18,7 +18,7 @@
 
 {% compress css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.responsive.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
 {% ifinstalled cartridge.shop %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/cartridge.css">
@@ -29,7 +29,7 @@
 
 {% compress js %}
 <script src="{{ STATIC_URL }}mezzanine/js/{{ settings.JQUERY_FILENAME }}"></script>
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
 <script>
 $(function() {
     $('.middleinput:text, textarea').addClass('xlarge');
