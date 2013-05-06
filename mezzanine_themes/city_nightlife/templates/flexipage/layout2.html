@@ -1,0 +1,21 @@
+{% extends "pages/page.html" %}
+{% load mezzanine_tags %}
+
+{% block main %}{{ block.super }}
+<div>
+  {% editable flexi_content_field1.content %}
+   {{flexi_content_field1.content|richtext_filter|safe}}
+  {% endeditable %}
+</div>
+<div>
+  {% editable flexi_content_field2.content %}
+   {{flexi_content_field2.content|richtext_filter|safe}}
+  {% endeditable %}
+</div>
+<div>
+  {% editable flexi_side_bar.content %}
+   {{flexi_side_bar.content|richtext_filter|safe}}
+  {% endeditable %}
+</div>
+
+{% endblock %}

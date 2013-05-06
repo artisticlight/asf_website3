@@ -245,6 +245,7 @@ INSTALLED_APPS = (
     "mezzanine.twitter",
     #"mezzanine.accounts",
     #"mezzanine.mobile",
+    "flexipage",
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -288,6 +289,13 @@ MIDDLEWARE_CLASSES = (
 # at the moment we are using custom forks of them.
 PACKAGE_NAME_FILEBROWSER = "filebrowser_safe"
 PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
+
+# Tell mezzanine-flexipage what your flexi templates are (start.html comes with the package)
+FLEXI_TEMPLATES = (
+     ('start.html','start'),
+     ('layout1.html','layout1'),
+     ('layout2.html','layout2'),
+ )
 
 #########################
 # OPTIONAL APPLICATIONS #
