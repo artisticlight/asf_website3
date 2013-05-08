@@ -1,129 +1,1403 @@
 <!DOCTYPE html>
 {% load pages_tags mezzanine_tags i18n %}
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+{% block head %}
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="{% block meta_viewport %}width=device-width, initial-scale=1.0{% endblock %}">
+	<meta name="keywords" content="{% block meta_keywords %}synthetic aperture radar, data, SAR, remote sensing{% endblock %}">
+	<meta name="description" content="{% block meta_description %}Alaska Satellite Facility is the best source for synthetic aperture radar data.{% endblock %}">
+    <meta name="author" "{% block meta_author %}Alaska Satellite Facility{% endblock meta_author %}">
+	<meta name="rights" content="{% block meta_rights %}All Rights Reserved{% endblock %}" />
+	<meta name="generator" content="{% block meta_generator %}Project Team at the Alaska Satellite Facility{% endblock %}" />
 
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width">
-<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
-<meta name="description" content="{% block meta_description %}{% endblock %}">
-<title>{% block full_meta_title %}{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}{% endblock %}</title>
-<link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico">
-<link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico">
+    {% block meta_extras %}
+    {% endblock meta_extras %}
 
-{% ifinstalled mezzanine.blog %}
-<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
-<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
-{% endifinstalled %}
+	<title>{% block full_meta_title %}{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}{% endblock %}</title>
 
-{% compress css %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
-{% ifinstalled cartridge.shop %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/cartridge.css">
-{% endifinstalled %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/theme.css">
-{% block extra_css %}{% endblock %}
-{% endcompress %}
+    {% block head_links %}
+    	{% block head_links_bootstrap %}
+			<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
+			<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
+       	{% endblock head_links_bootstrap %}
 
-{% compress js %}
-<script src="{{ STATIC_URL }}mezzanine/js/{{ settings.JQUERY_FILENAME }}"></script>
-<script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
-<script>
-$(function() {
-    $('.middleinput:text, textarea').addClass('xlarge');
-    $('.control-group label').addClass('control-label');
-});
-</script>
-{% block extra_js %}{% endblock %}
-{% endcompress %}
-<!--[if lt IE 9]>
-<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
+		<!-- Font Awesome -->
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome-corp.css">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome-ext.css">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome-social.css">
+		<!--[if IE 7]>
+			<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome-ie7.min.css">
+			<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/font-awesome-more-ie7.min.css">
+		<![endif]-->
+		<!-- End Font Awesome -->
+		<!-- Menu Styles -->
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/menu/core.css">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/menu/styles/lwhite.css" id="custom_menu">
+		<!--[if (gt IE 9)|!(IE)]><!-->
+			<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/menu/effects/fading.css" media="screen">
+			<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/menu/effects/slide.css" media="screen">
+		<!--<![endif]-->
+		<!-- End Menu Styles -->
+		<!-- Revolution Slider -->
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/fullwidth.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/rs-plugin/css/settings.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/captions.css" media="screen" />
+		<!-- End Revolution Slider -->
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style-switcher.css">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/animate.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/skins/default.css" id="custom_skin">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,400italic" id="custom_font">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/prettyPhoto.css">
+		<link rel="shortcut icon" href="favicon.ico">
 
-{% block extra_head %}{% endblock %}
+	{% endblock head_links %}
+
+    {% block head_links_portal %}
+    {% endblock head_links_portal %}
+
+    {% block head_links_extras %}
+    {% endblock head_links_extras %}
+
+	<!--[if lte IE 9]>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/ie.css"/>
+	<![endif]-->
+
+	{% block head_scripts %}
+		<!--[if lte IE 8]>
+			<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/selectivizr.min.js"></script>
+			<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/respond.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/modernizr.min.js"></script>
+    	{% block head_scripts_jquery %}
+			<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.min.js"></script>
+    	{% endblock head_scripts_jquery %}
+    	{% block head_scripts_bootstrap %}
+			<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
+    	{% endblock head_scripts_bootstrap %}
+
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/retina.js"></script>
+	{% endblock head_scripts %}
+
+    {% block head_scripts_extras %}
+    {% endblock head_scripts_extras %}
+
+	{% block head_google_analytics %}
+		<!-- Google Analytics Tracking Code -->
+	{% endblock head_google_analytics %}
 
 </head>
-<body id="{% block body_id %}body{% endblock %}">
+{% endblock head %}
 
-<div id="header" class="container">
-    <div class="row">
-        <div id="site-info" class="span6">
-            <div id="site-logo"><a href="/"><img src="{{ STATIC_URL }}img/logo.png" /></a></div>
-            <div id="site-titles">
-            {% if settings.SITE_TITLE %}<div id="site-title"><a href="/">{{ settings.SITE_TITLE }}</a></div>{% endif %}
-            {% if settings.SITE_TAGLINE %}<div id="site-tagline">{{ settings.SITE_TAGLINE }}</div>{% endif %}
-            </div>
-        </div>
-        <div id="navigation" class="span6">
-            {% page_menu "pages/menus/dropdown.html" %}
-        </div>
-    </div>
-</div>
+{% block body %}
+<body {% block body_tag %}class="wide"{% endblock body_tag %}>
+	{% block body_initialize %}
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+	{% endblock body_initialize %}
+	<div {% block layout_div %}class="layout"{% endblock %}>
+		{% block body_header %}
+			<!-- Main Header -->
+			<header>
+				<!-- Top Bar -->
+				<div class="top-bar">
+					<div class="container">
+						<div class="row">
+							<div class="span7 hidden-phone">
+								<!-- Menu Top -->
+								<ul class="menu-top unstyled inline">
+									<li class="parent"><a href="widgets.html">Widgets <i class="icon-angle-down"></i></a>
+										<!-- First Level -->
+										<ul class="unstyled">
+											<li><a href="widgets.html#tab"><i class="icon-cogs"></i> Tabs</a></li>
+											<li><a href="widgets.html#articles"><i class="icon-cogs"></i> Articles</a></li>
+											<li><a href="widgets.html#comment"><i class="icon-cogs"></i> Comments</a></li>
+											<li><a href="widgets.html#top-musics"><i class="icon-cogs"></i> Top Musics</a></li>
+											<li><a href="widgets.html#popular-products"><i class="icon-cogs"></i> Popular Products</a></li>
+											<li><a href="widgets.html#upcoming-events"><i class="icon-cogs"></i> Upcoming Events</a></li>
+											<li><a href="widgets.html#top-videos"><i class="icon-cogs"></i> Top Videos</a></li>
+											<li><a href="widgets.html#contact-form"><i class="icon-cogs"></i> Contact Form</a></li>
+											<li><a href="widgets.html#newsletter"><i class="icon-cogs"></i> Newsletter</a></li>
+											<li><a href="widgets.html#flickr-photos"><i class="icon-cogs"></i> Flickr Photos</a></li>
+											<li><a href="widgets.html#featured-video"><i class="icon-cogs"></i> Featured Video</a></li>
+											<li><a href="widgets.html#social-counter"><i class="icon-cogs"></i> Social Counter</a></li>
+											<li><a href="widgets.html#tag"><i class="icon-cogs"></i> Tags</a></li>
+											<li><a href="widgets.html#testimonials"><i class="icon-cogs"></i> Testimonials</a></li>
+											<li><a href="widgets.html"><i class="icon-plus"></i> See more widgets</a></li>
+										</ul>
+										<!-- End First Level -->
+									</li>
+									<li><a href="sitemap.html">Sitemap</a></li>
+									<li><a href="why.html">Why City Nightlife?</a></li>
+									<li><a href="http://themeforest.net/item/city-nightlife-responsive-multipurpose-theme/4540302">Purchase Now</a></li>
+									<li><a href="//www.atomtech.com.br/forum/index.html?p=/categories/city-nightlife" class="visible-desktop" target="_blank">Forum Support</a></li>
+								</ul>
+								<!-- End Menu Top -->
+							</div>
+							<div class="span5">
+								<!-- Access -->
+								<ul class="access unstyled">
+									<li class="register">Not have account? <a href="login.html">Sign Up</a></li>
+									<li class="login-area"><a href="login.html"><i class="icon-user"></i> Login</a>
+										<div class="form">
+											<form action="#">
+												<div class="control-group">
+													<label class="control-label" for="inputEmail">Email</label>
+													<div class="controls">
+														<div class="input-prepend">
+															<span class="add-on"><i class="icon-envelope"></i></span>
+															<input class="input-medium" type="text" id="inputEmail" placeholder="Email address">
+														</div>
+													</div>
+												</div>
+												<div class="control-group">
+													<label class="control-label" for="inputPassword">Password</label>
+													<div class="controls">
+														<div class="input-prepend">
+															<span class="add-on"><i class="icon-key"></i></span>
+															<input class="input-medium" type="password" id="inputPassword" placeholder="Password">
+														</div>
+													</div>
+												</div>
+												<div class="control-group">
+													<div class="controls">
+														<label class="checkbox">
+															<input type="checkbox"> Remember me
+														</label>
+														<div class="pull-left">
+															<a href="#" class="link"><i class="icon-exclamation-sign"></i> Lost password?</a>
+														</div>
+														<div class="pull-right">
+															<button type="submit" class="btn">Sign in</button>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</li>
+								</ul>
+								<!-- End Access -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Top Bar -->
+				<!-- Header -->
+				<div class="header">
+					<div class="container">
+						<div class="row">
+							<div class="span4">
+								<!-- Logo -->
+								<div class="logo">
+									<a href="index.html"><img id="logo" src="{{ STATIC_URL }}images/logos/logo_default.png" alt="City Nightlife"></a>
+									<h2 class="hide-text">City Nightlife - Entertainment, Cities Guide and Promotions</h2>
+								</div>
+								<!-- End Logo -->
+							</div>
+							<div class="span8">
+								<!-- Ad-728 -->
+									<div class="ad-728 hidden-phone">
+										<div class="image">
+											<a href="#"><img id="ad-728" src="http://placehold.it/770x95" alt="Advertising" /></a>
+										</div>
+										<div class="advertising"></div>
+										<script type="text/javascript">
+											/* <![CDATA[ */
+											jQuery.noConflict();
 
-<div id="main" class="container">
+											(function($) {
+												$(function() {
+													$(window).on('resize', function() {
+														$('.ad-728').each(function() {
+															$(this).find('.advertising').height($(this).height());
+														});
+													}).resize();
+												});
+											})(jQuery);
+											/* ]]> */
+										</script>
+									</div>
+									<!-- End Ad-728 -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Header -->
+				<!-- Navigation -->
+				<nav id="nav" class="navigation lwhite">
+					<div class="container">
+						<div class="row">
+							<div class="span12">
+								<ul class="menu fading">
+									<li class="active"><a href="index.html">Home</a></li>
+									<li><a href="#">Suggestions</a>
+										<!-- Mega Menu -->
+										<div class="cols3">
+											<div class="col3">
+												<h4>We have prepared some portals suggestions for you!</h4>
+											</div>
+											<div class="col1">
+												<h5>Content Portal</h5>
+												<ol>
+													<li><a href="news.html"><i class="icon-bullhorn"></i> News Portal</a></li>
+													<li><a href="jobs.html"><i class="icon-briefcase"></i> Jobs Portal</a></li>
+													<li><a href="recipes.html"><i class="icon-food"></i> Recipes Portal</a></li>
+													<li><a href="education.html"><i class="icon-lightbulb"></i> Education Portal</a></li>
+													<li><a href="personal.html"><i class="icon-user"></i> Personal Portal</a></li>
+												</ol>
+											</div>
+											<div class="col1">
+												<h5>Multimidia Portal</h5>
+												<ol>
+													<li><a href="music.html"><i class="icon-music"></i> Music Portal</a></li>
+													<li><a href="video.html"><i class="icon-facetime-video"></i> Video Portal</a></li>
+													<li><a href="games.html"><i class="icon-dashboard"></i> Games Portal</a></li>
+													<li><a href="sports.html"><i class="icon-trophy"></i> Sports Portal</a></li>
+													<li><a href="events.html"><i class="icon-circle"></i> Events</a></li>
+												</ol>
+											</div>
+											<div class="col1">
+												<h5>Do more!</h5>
+												<p>This <a href="#">Mega Menu</a> can handle everything.</p>
+												<p>Lists, paragraphs, forms, images, tables...</p>
+											</div>
+										</div>
+										<!-- End Mega Menu -->
+									</li>
+									<li><a href="#">Sliders</a>
+										<!-- First Level -->
+										<ul>
+											<li><a href="slider-revolution.html"><i class="icon-desktop"></i> Slider Revolution</a></li>
+											<li><a href="camera.html"><i class="icon-desktop"></i> Camera Slideshow</a></li>
+											<li><a href="hero-carousel.html"><i class="icon-desktop"></i> Hero Carousel</a></li>
+											<li class="parent"><a href="#"><i class="icon-desktop"></i> Static Content</a>
+												<ul>
+													<li><a href="static-image.html"><i class="icon-desktop"></i> Static Image</a></li>
+													<li><a href="static-video.html"><i class="icon-desktop"></i> Static Video</a></li>
+													<li><a href="video.html"><i class="icon-desktop"></i> Info Blocks</a></li>
+												</ul>
+											</li>
+										</ul>
+										<!-- End First Level -->
+									</li>
+									<li><a href="#">Headers</a>
+										<!-- First Level -->
+										<ul>
+											<li><a href="jobs.html">Big Search I</a></li>
+											<li><a href="events.html">Big Search II</a></li>
+											<li><a href="news.html">Medium Search I</a></li>
+											<li><a href="music.html">Medium Search II</a></li>
+											<li><a href="recipes.html">Simple Search I</a></li>
+											<li><a href="education.html">Simple Search II</a></li>
+											<li><a href="personal.html">Social Icons</a></li>
+											<li><a href="video.html">Banner</a></li>
+											<li><a href="sports.html">Logo Center</a></li>
+										</ul>
+										<!-- End First Level -->
+									</li>
+									<li><a href="#">Pages <span class="bubble">14</span></a>
+										<!-- First Level -->
+										<ul>
+											<li><a href="about.html"><i class="icon-info-sign"></i> About Page</a></li>
+											<li class="parent"><a href="single.html"><i class="icon-file-alt"></i> Single Page</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="full-width.html">Full Width</a></li>
+													<li><a href="left-sidebar.html">Left Sidebar</a></li>
+													<li><a href="single.html">Right Sidebar</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li class="parent"><a href="blog.html"><i class="icon-comments-alt"></i> Blog</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="blog-large.html">Blog Large Image</a></li>
+													<li><a href="blog-post.html">Post Right Sidebar</a></li>
+													<li><a href="blog-post-left.html">Post Left Sidebar</a></li>
+													<li><a href="blog-post-full-width.html">Post Full Width</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li class="parent"><a href="faq.html"><i class="icon-question-sign"></i> FAQ</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="faq.html">FAQ Archive</a></li>
+													<li><a href="faq-knowledgebase.html">FAQ Knowledgebase</a></li>
+													<li><a href="faq-filter.html">FAQ with Filter</a></li>
+													<li><a href="faq-full-width.html">FAQ Full Width</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li class="parent"><a href="members.html"><i class="icon-group"></i> Members</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="member-page.html">Member Page</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li><a href="services.html"><i class="icon-tasks"></i> Services</a></li>
+											<!-- <li><a href="jobs.html"><i class="icon-briefcase"></i> Jobs</a> -->
+												<!-- Second Level -->
+												<!-- <ul> -->
+													<!-- <li><a href="job-post.html">Job Post</a></li> -->
+												<!-- </ul> -->
+												<!-- End Second Level -->
+											<!-- </li> -->
+											<li class="parent"><a href="portfolio.html"><i class="icon-book"></i> Portfolio</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="portfolio-item.html">Portfolio Item</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li class="parent"><a href="gallery.html"><i class="icon-picture"></i> Gallery</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="gallery-item.html">Gallery Item</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li class="parent"><a href="videos.html"><i class="icon-play-circle"></i> Videos</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="video-post.html">Video Post</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li class="parent"><a href="shop.html"><i class="icon-shopping-cart"></i> Shop</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="product-item.html">Product Page</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li class="parent"><a href="login.html"><i class="icon-user"></i> Login Page</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="login-float.html">Login Alternative</a></li>
+													<!-- <li><a href="profile.html">Profile Page</a></li> -->
+													<!-- <li><a href="register.html">Register Page</a></li> -->
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li><a href="contact.html"><i class="icon-envelope"></i> Contact Us</a></li>
+											<li class="parent"><a href="404.html"><i class="icon-remove-sign"></i> 404 Error</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="no-results.html">No Results</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li><a href="sitemap.html"><i class="icon-sitemap"></i> Sitemap</a></li>
+										</ul>
+										<!-- End First Level -->
+									</li>
+									<li><a href="features.html">Features</a>
+										<!-- First Level -->
+										<ul>
+											<li><a href="features.html#ultra-responsive">Ultra Responsive</a></li>
+											<li><a href="features.html#retina-ready">Retina-Ready</a></li>
+											<li><a href="features.html#infinity-colors">Infinity Colors</a></li>
+											<li><a href="features.html#boxed-wide">Boxed &amp; Wide Layout</a></li>
+											<li><a href="features.html#support">Custom Support</a></li>
+											<li class="parent"><a href="#">3rd Level Dropdown</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="#">First Item</a></li>
+													<li class="parent"><a href="#">Second Item</a>
+														<!-- Third Level -->
+														<ul>
+															<li><a href="#">First Item</a></li>
+															<li><a href="#">Second Item</a></li>
+															<li><a href="#">Third Item</a></li>
+														</ul>
+														<!-- End Third Level -->
+													</li>
+													<li><a href="#">Third Item</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+										</ul>
+										<!-- End First Level -->
+									</li>
+									<li><a href="#">Shortcodes <span class="bubble-alt">14</span></a>
+										<!-- First Level -->
+										<ul>
+											<li class="parent"><a href="#"><i class="icon-twitter"></i> Twitter Bootstrap</a>
+												<!-- Second Level -->
+												<ul>
+													<li><a href="alert-messages.html"><i class="icon-exclamation-sign"></i> Alert Messages</a></li>
+													<li><a href="lists.html"><i class="icon-list"></i> Lists</a></li>
+													<li><a href="collapse.html"><i class="icon-align-justify"></i> Collapse</a></li>
+													<li><a href="tooltips.html"><i class="icon-comment"></i> Tooltips</a></li>
+													<li><a href="typography.html"><i class="icon-text-height"></i> Typography</a></li>
+													<li><a href="blockquotes.html"><i class="icon-quote-left"></i> Blockquotes</a></li>
+													<li><a href="grid-positions.html"><i class="icon-tasks"></i> Grid Positions</a></li>
+													<li><a href="tables.html"><i class="icon-table"></i> Tables</a></li>
+													<li><a href="forms.html"><i class="icon-reorder"></i> Forms</a></li>
+													<li><a href="buttons.html"><i class="icon-circle-blank"></i> Buttons</a></li>
+													<li><a href="tabs.html"><i class="icon-list-alt"></i> Tabs</a></li>
+												</ul>
+												<!-- End Second Level -->
+											</li>
+											<li><a href="pricing-table.html">Pricing Tables</a></li>
+											<li><a href="headings-highlights-dividers.html">Heading, Highlight, Divider</a></li>
+											<li><a href="teaser-boxes-callouts.html">Teaser, Boxes, Callouts</a></li>
+											<!-- <li><a href="toggles-accordions.html">Toggles &amp; Accordions</a></li> -->
+											<li><a href="dropcaps.html">Dropcaps</a></li>
+											<li><a href="lightbox.html">Lightbox</a></li>
+											<li><a href="responsive-video.html">Responsive Video</a></li>
+											<li><a href="thought.html">Thought</a></li>
+											<li><a href="boxes.html">Boxes</a></li>
+											<li><a href="datatables.html">Data Tables</a></li>
+											<li><a href="content-box.html">Content Box</a></li>
+											<li><a href="social-media.html">Social Media</a></li>
+											<li><a href="font-awesome.html">Font Awesome</a></li>
+											<li><a href="google-maps.html">Google Maps</a></li>
+											<li><a href="qr-code.html">QR Code</a></li>
+										</ul>
+										<!-- End First Level -->
+									</li>
+									<li><a href="widgets.html">Widgets <span class="bubble-alt">24</span></a>
+										<!-- First Level -->
+										<ul>
+											<li><a href="widgets.html#social-counter"><i class="icon-cogs"></i> Social Counter</a></li>
+											<li><a href="widgets.html#newsletter"><i class="icon-cogs"></i> Newsletter</a></li>
+											<li><a href="widgets.html#tab"><i class="icon-cogs"></i> Tabs</a></li>
+											<li><a href="widgets.html#banners"><i class="icon-cogs"></i> Banners</a></li>
+											<li><a href="widgets.html#video"><i class="icon-cogs"></i> Video</a></li>
+											<li><a href="widgets.html#flickr"><i class="icon-cogs"></i> Flickr</a></li>
+											<li><a href="widgets.html#advertising"><i class="icon-cogs"></i> Advertising</a></li>
+											<li><a href="widgets.html#testimonials"><i class="icon-cogs"></i> Testimonials</a></li>
+											<li><a href="widgets.html#twitter"><i class="icon-cogs"></i> Twitter</a></li>
+											<li><a href="widgets.html#comments"><i class="icon-cogs"></i> Comments</a></li>
+											<li><a href="widgets.html#tags"><i class="icon-cogs"></i> Tags</a></li>
+											<li><a href="widgets.html#upcoming-events"><i class="icon-cogs"></i> Upcoming Events</a></li>
+											<li><a href="widgets.html"><i class="icon-plus"></i> See more widgets</a></li>
+										</ul>
+										<!-- End First Level -->
+									</li>
+								</ul>
+								<div class="pull-right">
+									<div id="language" class="language visible-desktop">
+										<a href="#" class="current"><i class="icon-globe"></i> <span>English</span> <i class="icon-angle-down"></i></a>
+										<div class="language-selector">
+											<div class="page-header">
+												<h5><i class="icon-globe"></i> Select your language <span class="pull-right"><a href="#" class="close"><i class="icon-remove-sign"></i></a></span></h5>
+											</div>
+											<ul class="unstyled">
+												<li class="select"><a href="#" data-language="English"><img src="{{ STATIC_URL }}images/flags/us.png" alt=""> English</a></li>
+												<li><a href="#" data-language="Español"><img src="{{ STATIC_URL }}images/flags/es.png" alt=""> Español</a></li>
+												<li><a href="#" data-language="العربية"><img src="{{ STATIC_URL }}images/flags/sa.png" alt=""> العربية</a></li>
+												<li><a href="#" data-language="Deutsch"><img src="{{ STATIC_URL }}images/flags/de.png" alt=""> Deutsch</a></li>
+												<li><a href="#" data-language="Nederlands"><img src="{{ STATIC_URL }}images/flags/lu.png" alt=""> Nederlands</a></li>
+												<li><a href="#" data-language="Italiano"><img src="{{ STATIC_URL }}images/flags/ie.png" alt=""> Italiano</a></li>
+												<li><a href="#" data-language="Português"><img src="{{ STATIC_URL }}images/flags/br.png" alt=""> Português</a></li>
+												<li><a href="#" data-language="Bahasa"><img src="{{ STATIC_URL }}images/flags/lr.png" alt=""> Bahasa</a></li>
+												<li><a href="#" data-language="Türkçe"><img src="{{ STATIC_URL }}images/flags/tr.png" alt=""> Türkçe</a></li>
+												<li><a href="#" data-language="繁體中文"><img src="{{ STATIC_URL }}images/flags/cn.png" alt=""> 繁體中文</a></li>
+												<li><a href="#" data-language="Français"><img src="{{ STATIC_URL }}images/flags/gf.png" alt=""> Français</a></li>
+												<li><a href="#" data-language="日本語"><img src="{{ STATIC_URL }}images/flags/jp.png" alt=""> 日本語</a></li>
+											</ul>
+											<hr>
+											<p><a href="#">Help translate City Nightlife into your language</a></p>
+										</div>
+										<script type="text/javascript">
+											/* <![CDATA[ */
+											jQuery.noConflict();
 
-    {% nevercache %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}" data-alert="alert">
-    <a class="close" href="#" onclick="$(this).parent().fadeOut('fast'); return false;">×</a>{{ message }}
-    </div>
-    {% endfor %}
-    {% endnevercache %}
+											(function ($) {
+												$(function () {
+													$('#language').each(function() {
+														$(this).find('.current').on('click', function(event) {
+															event.preventDefault();
 
-    {% block full %}
-    <div class="row">
+															$('.language-selector').css({
+																visibility: 'visible',
+																opacity: 1
+															});
+														});
 
-        <div class="span9 middle">
+														$(this).find('.language-selector .close, .language-selector li a').on('click', function(event) {
+															event.preventDefault();
 
-            <ul class="breadcrumb-custom">
-            {% spaceless %}
-            {% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
-            {% endspaceless %}
-            </ul>
+															$('.language-selector').css({
+																visibility: 'hidden',
+																opacity: 0
+															});
+														});
 
-            <h1>{% block title %}{% endblock %}</h1>
-            <!-- <p>Here is the start of the main block</p> -->
-            {% block main %}{% endblock %}
-            <!-- <p>Here is the end of the main block</p> -->
+														$(this).find('.language-selector li').on('click', 'a', function(event) {
+															$('#language .current span').html($(this).data('language'));
 
-        </div>
+															$('#language').find('.language-selector li').removeClass();
+															$(this).parent().addClass('select');
+														});
+													});
+												});
+											})(jQuery);
+											/* ]]> */
+										</script>
+									</div>
+								</div>
+								<!-- <div class="pull-right">
+									<div class="language hidden-phone">
+										<ul class="lang-inline">
+											<li class="lang-active">
+												<a href="#"><img src="{{ STATIC_URL }}images/en.png" alt="" data-toggle="tooltip" title="English" /></a>
+											</li>
+											<li>
+												<a href="#"><img src="{{ STATIC_URL }}images/es.png" alt="" data-toggle="tooltip" title="Español" /></a>
+											</li>
+											<li>
+												<a href="#"><img src="{{ STATIC_URL }}images/br.png" alt="" data-toggle="tooltip" title="Português" /></a>
+											</li>
+										</ul>
+									</div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</nav>
+				<!-- End Navigation -->
+				<div class="overall">
+					<div class="inner">
+						<div class="shadow-top"></div>
+						<div class="shadow-bottom"></div>
+						<!-- Revolution Slider -->
+						<div class="fullwidthbanner-container">
+							<div class="fullwidthbanner">
+								<ul class="unstyled" style="display: none;">
+									<!-- Slide 01 -->
+									<li data-transition="fade" data-slotamount="1">
+										<img src="" alt="">
+										<div class="caption randomrotate"
+											data-x="-36"
+											data-y="220"
+											data-speed="500"
+											data-start="100"
+											data-easing="easeOutExpo">
+											<a href="#" target="_blank"><img src="http://placehold.it/353x215/333333/969696" alt=""></a>
+										</div>
+										<div class="caption randomrotate"
+											data-x="146"
+											data-y="180"
+											data-speed="500"
+											data-start="300"
+											data-easing="easeOutExpo">
+											<a href="#" target="_blank"><img src="http://placehold.it/353x255/666666/969696" alt=""></a>
+										</div>
+										<div class="caption randomrotate"
+											data-x="692"
+											data-y="220"
+											data-speed="500"
+											data-start="100"
+											data-easing="easeOutExpo">
+											<a href="#" target="_blank"><img src="http://placehold.it/353x215/333333/969696" alt=""></a>
+										</div>
+										<div class="caption randomrotate"
+											data-x="510"
+											data-y="180"
+											data-speed="500"
+											data-start="300"
+											data-easing="easeOutExpo">
+											<a href="#" target="_blank"><img src="http://placehold.it/353x255/666666/969696" alt=""></a>
+										</div>
+										<div class="caption randomrotate"
+											data-x="center"
+											data-y="140"
+											data-speed="500"
+											data-start="600"
+											data-easing="easeOutExpo">
+											<a href="#" target="_blank"><img src="http://placehold.it/353x295" alt=""></a>
+										</div>
+										<div class="caption big_white lfl"
+											data-x="center"
+											data-y="50"
+											data-speed="900"
+											data-start="500"
+											data-easing="easeOutExpo">
+											<div>City Nightlife Responsive Multi-Purpose Theme</div>
+										</div>
+										<div class="caption medium_grey lfr"
+											data-x="center"
+											data-y="100"
+											data-speed="900"
+											data-start="300"
+											data-easing="easeOutExpo">
+											<div>For Corporate, Business, Magazine, Portfolio, Personal and so on…</div>
+										</div>
+									</li>
+									<!-- End Slide 01 -->
+									<!-- Slide 02 -->
+									<li data-transition="random" data-slotamount="7" data-masterspeed="300">
+										<img src="http://placehold.it/1350x400/ffffff/969696" alt="" >
+										<div class="caption fl-title lft"
+											data-x="0"
+											data-y="50"
+											data-speed="1800"
+											data-start="500"
+											data-easing="easeInOutElastic">
+											<div style="width: 75%; position: relative;">Responsive Design and<br> <span class="colored">CrossBrowser</span> Theme</div>
+										</div>
+										<div class="caption lfr"
+											data-x="530"
+											data-y="40"
+											data-speed="800"
+											data-start="800"
+											data-easing="easeOutExpo">
+											<img src="http://placehold.it/350x322/333333/969696" alt="" >
+										</div>
+										<div class="caption lfr"
+											data-x="720"
+											data-y="187"
+											data-speed="1100"
+											data-start="1100"
+											data-easing="easeOutBack">
+											<img src="http://placehold.it/300x173/666666/969696" alt="" >
+										</div>
+										<div class="caption lft"
+											data-x="440"
+											data-y="165"
+											data-speed="1100"
+											data-start="1400"
+											data-easing="easeOutExpo">
+											<img src="http://placehold.it/150x194/999999/ffffff" alt="" >
+										</div>
+										<div class="caption lft"
+											data-x="560"
+											data-y="255"
+											data-speed="1400"
+											data-start="1700"
+											data-easing="easeOutExpo">
+											<img src="http://placehold.it/80x128/" alt="" >
+										</div>
+										<div class="caption small_text lfb"
+											data-x="0"
+											data-y="130"
+											data-speed="1100"
+											data-start="2000"
+											data-easing="easeOutExpo">
+											<div style="width: 50%; position: relative;">Don't matter what is your device to access our site, it will be able to<br> adapt to your resolution and show all information. And more, the<br> City Nightlife is CrossBrowser, compatible with all major browsers.</div>
+										</div>
+										<div class="caption lfb"
+											data-x="0"
+											data-y="210"
+											data-speed="2200"
+											data-start="2300"
+											data-easing="easeInOutQuint">
+											<a href="why.html" class="btn-solid btn-solid-large">Read More</a>
+										</div>
+									</li>
+									<!-- End Slide 02 -->
+									<!-- Slide 03 -->
+									<li data-transition="random" data-slotamount="7" data-masterspeed="300">
+										<img src="http://placehold.it/1350x400/ffffff/969696" alt="" >
+										<div class="caption very_large_text lft"
+											data-x="0"
+											data-y="50"
+											data-speed="1500"
+											data-start="1100"
+											data-easing="easeOutExpo">HTML5 &amp; CSS3</div>
+										<div class="caption fl-title lft"
+											data-x="0"
+											data-y="110"
+											data-speed="1500"
+											data-start="1500"
+											data-easing="easeOutExpo">
+											<div>Based on Twitter Bootstrap</div>
+										</div>
+										<div class="caption small_text lfb"
+											data-x="0"
+											data-y="165"
+											data-speed="1200"
+											data-start="2300"
+											data-easing="easeOutExpo">
+											<div style="width: 50%; position: relative;">With HTML5 we can do more dynamic website, makes creating accessible sites<br>
+												easier, make ours videos and audio truly accessible, better interactions.<br><br>
+												Easier and with more features, your site with CSS3 will be much more<br>
+												attractive and lightweight.</div>
+										</div>
+										<div class="caption lfb"
+											data-x="0"
+											data-y="280"
+											data-speed="1200"
+											data-start="2500"
+											data-easing="easeInOutExpo">
+											<a href="http://themeforest.net/item/city-nightlife-responsive-multipurpose-theme/4540302" class="btn-solid">Buy Now</a>
+										</div>
+										<div class="caption lft"
+											data-x="550"
+											data-y="50"
+											data-speed="800"
+											data-start="1400"
+											data-easing="easeInOutQuint">
+											<img src="http://placehold.it/200x226" alt="" >
+										</div>
+										<div class="caption lfr"
+											data-x="720"
+											data-y="100"
+											data-speed="800"
+											data-start="1800"
+											data-easing="easeInOutQuint">
+											<img src="http://placehold.it/200x227/666666/969696" alt="" >
+										</div>
+									</li>
+									<!-- End Slide 03 -->
+									<!-- Slide 04 -->
+									<li data-transition="slidehorizontal" data-slotamount="7" data-masterspeed="300">
+										<img src="" alt="" style="background-color: #2a2a2a" >
+										<div class="caption lfb"
+											data-x="440"
+											data-y="40"
+											data-speed="1000"
+											data-start="800"
+											data-easing="easeOutExpo">
+											<iframe src="//www.youtube.com/embed/ASO_zypdnsQ?hd=1&amp;wmode=opaque&amp;controls=1&amp;showinfo=0;rel=0" width="550" height="309" style="width: 550px; height: 309px;"></iframe>
+										</div>
+										<div class="caption very_big_white lfb"
+											data-x="-4"
+											data-y="50"
+											data-speed="1000"
+											data-start="1100"
+											data-easing="easeOutExpo">
+											<div>Play Youtube &amp;<br>Vimeo Videos</div>
+										</div>
+										<div class="caption medium_text lfr"
+											data-x="0"
+											data-y="160"
+											data-speed="1000"
+											data-start="1400"
+											data-easing="easeOutExpo">
+											<div class="colored">Responsive video support!</div>
+										</div>
+										<div class="caption small_text lfr"
+											data-x="0"
+											data-y="195"
+											data-speed="1000"
+											data-start="1700"
+											data-easing="easeOutExpo">
+											<div>With City Nightlife you can show your corporate video production,<br>
+												merchandising video, magazine fashion video or prefered<br>
+												music video with featured.</div>
+										</div>
+										<div class="caption lfb"
+											data-x="0"
+											data-y="280"
+											data-speed="2500"
+											data-start="2000"
+											data-easing="easeInOutQuint">
+											<a href="http://themeforest.net/item/city-nightlife-responsive-multipurpose-theme/4540302" class="btn-solid btn-solid-large">Purchase Now</a>
+										</div>
+									</li>
+									<!-- End Slide 04 -->
+								</ul>
+								<div class="tp-bannertimer tp-bottom"></div>
+							</div>
+						</div>
+						<!-- End Revolution Slider -->
+					</div>
+				</div>
+				<!-- Search -->
+				<div class="search">
+					<div class="container">
+						<div class="row">
+							<div class="span6">
+								<!-- Breadcrumb -->
+								<ul class="breadcrumb hidden-phone">
+									<li class="active"><span class="divider"><a href="index.html" data-toggle="tooltip" title="Go to home"><i class="icon-home"></i></a></span></li>
+									<li><span>Home</span></li>
+								</ul>
+								<!-- End Breadcrumb -->
+							</div>
+							<div class="span6">
+								<div class="pull-right">
+									<!-- Search -->
+									<form action="#" method="post" class="form-inline">
+										<div class="input-append">
+											<input name="searchword" maxlength="20" class="inputbox input-xlarge" type="text" size="20" value="" placeholder="What are you looking for?" />
+											<button class="btn" data-toggle="tooltip" title="Random Search"><i class="icon-random"></i></button>
+											<button class="btn" data-toggle="tooltip" title="Advanced Search"><i class="icon-tasks"></i></button>
+											<button class="btn"><i class="icon-search"></i> <span class="hidden-phone">Search</span></button>
+										</div>
+									</form>
+									<!-- End Search -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Search -->
+			</header>
+			<!-- End Main Header -->
+		{% endblock body_header %}
+		{% block body_main %}
+		{% endblock body_main %}
+		{% block body_boxes %}
+			<!-- Boxes -->
 
-        <div class="span3 right">
+			<!-- End Boxes -->
+		{% endblock body_boxes %}
+		{% block body_ticker %}
+			<!-- Ticker -->
+			<div class="ticker">
+				<div class="container">
+					<div class="row">
+						<div class="span12">
+							<div id="ticker" class="tweet">
+								<i class="icon-refresh icon-spin"></i> Loading tweets...
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Ticker -->
+		{% endblock body_ticker %}
+		{% block body_footer %}		
+			<!-- Footer -->
+			<footer>
+				<!-- Footer Block -->
+				<div class="footer">
+					<div class="container">
+						<div class="row">
+							<div class="span3">
+								<!-- Logo -->
+								<div class="logo">
+									<a href="index.html"><img id="logo-footer" src="{{ STATIC_URL }}images/logos/logo_footer_default.png" alt="City Nightlife" /></a>
+									<script type="text/javascript">
+										jQuery.noConflict();
 
-            <div class="panel">
-            {% block right_panel %}
-            {% ifinstalled mezzanine.twitter %}
-            {% include "twitter/tweets.html" %}
-            {% endifinstalled %}
-            {% endblock %}
-            </div>
+										(function($) {
+											$(function() {
+												$(window).on('resize', function() {
+													// Logo Footer
+													$('.footer').each(function() {
+														if (Modernizr.mq('screen and (min-width: 768px)')) {
+															var maxHeight = Math.max.apply(null, $(this).find('.row').map(function() {
+																return $(this).height();
+															}).get());
 
-        </div>
+															var logo_height = $(this).find('.logo').height();
 
-    </div><!-- /row -->
-    {% endblock %}
+															$(this).find('.logo').css('margin-top', (maxHeight / 2) - (logo_height / 2));
+														} else {
+															$(this).find('.logo').removeAttr('style');
+														}
+													});
+												}).resize();
+											});
+										})(jQuery);
+									</script>
+								</div>
+								<!-- End Logo -->
+							</div>
+							<div class="span2">
+								<!-- Menus -->
+								<h3><i class="icon-plus-sign"></i> Register</h3>
+								<ul class="menu-footer unstyled register">
+									<li class="active"><a href="single.html"><i class="icon-plus"></i> Event</a></li>
+									<li><a href="single.html"><i class="icon-plus"></i> Company</a></li>
+									<li><a href="single.html"><i class="icon-plus"></i> Promotion</a></li>
+									<li><a href="single.html"><i class="icon-plus"></i> Job</a></li>
+									<li><a href="single.html"><i class="icon-plus"></i> Recipe</a></li>
+									<li><a href="single.html"><i class="icon-plus"></i> Product</a></li>
+									<li><a href="single.html"><i class="icon-plus"></i> Video</a></li>
+								</ul>
+								<h3><i class="icon-info-sign"></i> Help &amp; Support</h3>
+								<ul class="menu-footer unstyled suport">
+									<li><a href="faq-knowledgebase.html"><i class="icon-globe"></i> Wiki</a></li>
+									<li><a href="contact.html"><i class="icon-bullhorn"></i> Contact Support</a></li>
+									<li><a href="faq.html"><i class="icon-question-sign"></i> FAQ</a></li>
+								</ul>
+								<!-- End Menus -->
+							</div>
+							<div class="span3">
+								<!-- About us -->
+								<h3><i class="icon-book"></i> About Us</h3>
+								<p>The City Nightlife is a Premium Theme with HTML5, CSS3, jQuery, Sliders, Widgets working together to build your portal site, business site or personal site.</p>
+								<div class="count">
+									<div class="pull-left">
+										<h6><i class="icon-download"></i> Download</h6>
+										<h4>18.110.897</h4>
+									</div>
+									<div class="pull-left">
+										<h6><i class="icon-user"></i> Members</h6>
+										<h4>621.301</h4>
+									</div>
+								</div>
+								<address>
+									<strong>City Nightlife, Inc.</strong><br>
+									<i class="icon-map-marker"></i> 795 Folsom Ave, Suite 600<br>
+									San Francisco, CA 94107<br>
+								</address>
 
-</div><!-- /container #main -->
+								<address>
+									<i class="icon-phone"></i> (123) 456-7890<br>
+									<i class="icon-envelope-alt"></i> <a href="mailto:email@example.com">email@example.com</a>
+								</address>
+								<!-- End About us -->
+							</div>
+							<div class="span4">
+								<h3><i class="icon-comments-alt"></i> Testimonials</h3>
+								<!-- Testimonials Widget -->
+								<div id="testimonials-footer" class="testimonials flexslider" data-animationloop="false" data-controlnav="false">
+									<ul class="slides unstyled">
+										<li>
+											<blockquote>
+												<p><i class="icon-quote-left"></i> Obcaecati, deserunt, enim porro illo esse nisi ipsum accusamus ipsam inventore rerum non omnis sapiente culpa aut at ad unde saepe doloremque quidem tenetur repudiandae quaerat adipisci facilis vero vitae cumque eligendi.</p>
+												<small><cite title="Source Title">John Smith</cite>, Company CEO</small>
+											</blockquote>
+										</li>
+										<li>
+											<blockquote>
+												<p><i class="icon-quote-left"></i> Aperiam, odit, beatae, nesciunt eveniet maxime accusantium numquam veniam temporibus labore atque provident quam voluptatum deleniti asperiores sapiente consequuntur similique doloremque iure tenetur tempora eos ea eaque.</p>
+												<small><cite title="Source Title">Jane Roe</cite>, Company Support</small>
+											</blockquote>
+										</li>
+										<li>
+											<blockquote>
+												<p><i class="icon-quote-left"></i> Animi, aliquam ipsam error unde hic! Dolor, sed reprehenderit non voluptate eius ipsam perferendis aperiam! Dolores, perferendis, earum aspernatur similique repudiandae error officiis placeat perspiciatis fugit provident magnam!</p>
+												<small><cite title="Source Title">Jackie Joe</cite>, Company CEO</small>
+											</blockquote>
+										</li>
+										<li>
+											<blockquote>
+												<p><i class="icon-quote-left"></i> Tempora, unde reiciendis accusantium tenetur ducimus libero veritatis quam sunt consequuntur pariatur excepturi dolorem molestias voluptatum officia distinctio dicta repellendus ut vitae aut sed dolorum nam maxime aspernatur!</p>
+												<small><cite title="Source Title">John Doe</cite>, Company Programmer</small>
+											</blockquote>
+										</li>
+									</ul>
+								</div>
+								<!-- End Testimonials Widget -->
+								<!-- Social Widget -->
+								<ul class="social-icons inline">
+									<li><a href="#" data-toggle="tooltip" title="Facebook" class="facebook"><i class="icon-facebook"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="Twitter" class="twitter"><i class="icon-twitter"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="Google+" class="google-plus"><i class="icon-google-plus"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="LinkedIn" class="linkedin"><i class="icon-linkedin"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="Pinterest" class="pinterest"><i class="icon-pinterest"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="GitHub" class="github"><i class="icon-github-alt"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="Vimeo" class="vimeo"><i class="icon-vimeo"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="Dribbble" class="dribbble"><i class="icon-dribbble"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="Email" class="email"><i class="icon-envelope"></i></a></li>
+									<li><a href="#" data-toggle="tooltip" title="RSS" class="rss"><i class="icon-rss"></i></a></li>
+								</ul>
+								<!-- End Social Widget -->
+								<!-- Social Buttons Widget -->
+								<ul class="social-buttons unstyled inline">
+									<li class="facebook">
+										<div class="fb-like" data-href="http://envato.com/" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+									</li>
+									<li class="twitter">
+										<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://envato.com/" data-width="100"></a>
+										<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+									</li>
+									<li class="google-plus">
+										<div class="g-plusone" data-size="medium" data-align="left" data-href="http://envato.com/"></div>
+										<script type="text/javascript">
+										  (function() {
+											var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+											po.src = 'https://apis.google.com/js/plusone.js';
+											var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+										  })();
+										</script>
+									</li>
+								</ul>
+								<!-- End Social Buttons Widget -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Footer Block -->
+				<!-- Copyright -->
+				<div class="copyright">
+					<div class="container">
+						<div class="row">
+							<div class="span5">
+								<p>Copyright &copy; 2013 City Nightlife. <span class="author">Design by <a href="//www.atomtech.com.br" target="_blank">AtomTech</a>.</span></p>
+							</div>
+							<div class="span7">
+								<!-- Footer Menu -->
+								<ul class="unstyled">
+									<li class="active"><a href="index.html">Home</a></li>
+									<li><a href="single.html">Entertainment</a></li>
+									<li><a href="single.html">Cities Guide</a></li>
+									<li><a href="single.html">Promotions</a></li>
+									<li><a href="single.html">Jobs</a></li>
+								</ul>
+								<!-- End Footer Menu -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Copyright -->
+			</footer>
+			<!-- End Footer -->
+		{% endblock body_footer %}
+	</div>
+	{% block body_switcher %}
+		<!-- Style Switcher -->
+		<div id="switcher" class="switcher hidden-phone">
+			<div class="switcher-container">
+				<div class="heading">
+					<h5><i class="icon-beaker"></i> Style Switcher</h5>
+				</div>
+				<!-- Layout Select -->
+				<div class="layout-select">
+					<h6>Choose Layout</h6>
+					<ul class="unstyled inline">
+						<li><a href="#" data-layout="wide" class="active"><img src="{{ STATIC_URL }}images/demo/layout-wide.png" alt=""></a></li>
+						<li><a href="#" data-layout="boxed"><img src="{{ STATIC_URL }}images/demo/layout-boxed.png" alt=""></a></li>
+					</ul>
+				</div>
+				<!-- End Layout Select -->
+				<!-- Patterns -->
+				<div class="images patterns">
+					<h6>20 Patterns (Boxed Layout) <span class="remove"><i class="icon-remove"></i> Remove</span></h6>
+					<ul class="unstyled inline">
+						<li><a href="#" data-toggle="tooltip" title="Diagonal Striped Brick" data-name="diagonal_striped_brick"><img src="{{ STATIC_URL }}images/patterns/diagonal_striped_brick.png" data-at2x="images/patterns/diagonal_striped_brick_@2X.png" alt="Diagonal Striped Brick" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Noisy Grid" data-name="noisy_grid"><img src="{{ STATIC_URL }}images/patterns/noisy_grid.png" data-at2x="images/patterns/noisy_grid_@2X.png" alt="Noisy Grid" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="P6" data-name="p6"><img src="{{ STATIC_URL }}images/patterns/p6.png" data-at2x="images/patterns/p6_@2X.png" alt="P6" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Kindajean" data-name="kindajean"><img src="{{ STATIC_URL }}images/patterns/kindajean.png" data-at2x="images/patterns/kindajean_@2X.png" alt="Kindajean" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Struckaxiom" data-name="struckaxiom"><img src="{{ STATIC_URL }}images/patterns/struckaxiom.png" data-at2x="images/patterns/struckaxiom_@2X.png" alt="Struckaxiom" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Crosses" data-name="crosses"><img src="{{ STATIC_URL }}images/patterns/crosses.png" data-at2x="images/patterns/crosses_@2X.png" alt="Crosses" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Washi" data-name="washi"><img src="{{ STATIC_URL }}images/patterns/washi.png" data-at2x="images/patterns/washi_@2X.png" alt="Washi" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="G Play Pattern" data-name="gplaypattern"><img src="{{ STATIC_URL }}images/patterns/gplaypattern.png" data-at2x="images/patterns/gplaypattern_@2X.png" alt="G Play Pattern" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Merely Cubed" data-name="merely_cubed"><img src="{{ STATIC_URL }}images/patterns/merely_cubed.png" data-at2x="images/patterns/merely_cubed_@2X.png" alt="Merely Cubed" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Bedge Grunge" data-name="bedge_grunge"><img src="{{ STATIC_URL }}images/patterns/bedge_grunge.png" data-at2x="images/patterns/bedge_grunge_@2X.png" alt="Bedge Grunge" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Blueprint" data-name="blueprint"><img src="{{ STATIC_URL }}images/patterns/blueprint.png" data-at2x="images/patterns/blueprint_@2X.png" alt="Blueprint" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Gram Light" data-name="gram_light"><img src="{{ STATIC_URL }}images/patterns/gram_light.png" data-at2x="images/patterns/gram_light_@2X.png" alt="Gram Light" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Gram Dark" data-name="gram_dark"><img src="{{ STATIC_URL }}images/patterns/gram_dark.png" data-at2x="images/patterns/gram_dark_@2X.png" alt="Gram Dark" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Mocha Grunge" data-name="mochaGrunge"><img src="{{ STATIC_URL }}images/patterns/mochaGrunge.png" data-at2x="images/patterns/mochaGrunge_@2X.png" alt="Mocha Grunge" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Grey Wash Wall" data-name="grey_wash_wall"><img src="{{ STATIC_URL }}images/patterns/grey_wash_wall.png" data-at2x="images/patterns/grey_wash_wall_@2X.png" alt="Grey Wash Wall" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Random Grey Variations" data-name="random_grey_variations"><img src="{{ STATIC_URL }}images/patterns/random_grey_variations.png" data-at2x="images/patterns/random_grey_variations_@2X.png" alt="Random Grey Variations" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="PX by Gre3g" data-name="px_by_gre3g"><img src="{{ STATIC_URL }}images/patterns/px_by_gre3g.png" data-at2x="images/patterns/px_by_gre3g_@2X.png" alt="PX by Gre3g" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Irongrip" data-name="irongrip"><img src="{{ STATIC_URL }}images/patterns/irongrip.png" data-at2x="images/patterns/irongrip_@2X.png" alt="Irongrip" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Escheresque Ste" data-name="escheresque_ste"><img src="{{ STATIC_URL }}images/patterns/escheresque_ste.png" data-at2x="images/patterns/escheresque_ste_@2X.png" alt="Escheresque Ste" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Diagmonds" data-name="diagmonds"><img src="{{ STATIC_URL }}images/patterns/diagmonds.png" data-at2x="images/patterns/diagmonds_@2X.png" alt="Diagmonds" /></a></li>
+					</ul>
+				</div>
+				<!-- End Patterns -->
+				<!-- Backgrounds -->
+				<div class="images backgrounds">
+					<h6>20 Backgrounds (Boxed Layout) <span class="remove"><i class="icon-remove"></i> Remove</span></h6>
+					<ul class="unstyled inline">
+						<li><a href="#" class="background" data-toggle="tooltip" title="Colors Red Blue" data-name="colors_red_blue"><img src="{{ STATIC_URL }}images/backgrounds/colors_red_blue_thumb.jpg" alt="Colors Red Blue" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Concert Crowd" data-name="concert_crowd"><img src="{{ STATIC_URL }}images/backgrounds/concert_crowd_thumb.jpg" alt="Concert Crowd" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Michael Jackson Singer Hat" data-name="michael_jackson_singer_hat"><img src="{{ STATIC_URL }}images/backgrounds/michael_jackson_singer_hat_thumbs.jpg" alt="Michael Jackson Singer Hat" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="City Landscape" data-name="city_landscape"><img src="{{ STATIC_URL }}images/backgrounds/city_landscape_thumb.jpg" alt="City Landscape" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Tom Clancys Ghost Recon" data-name="tom_clancys_ghost_recon"><img src="{{ STATIC_URL }}images/backgrounds/tom_clancys_ghost_recon_thumb.jpg" alt="Tom Clancys Ghost Recon" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Zeichnung Abstrakt Linien" data-name="zeichnung_abstrakt_linien"><img src="{{ STATIC_URL }}images/backgrounds/zeichnung_abstrakt_linien_thumb.jpg" alt="Zeichnung Abstrakt Linien" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Zeichnung Spray" data-name="zeichnung_spray"><img src="{{ STATIC_URL }}images/backgrounds/zeichnung_spray_thumb.jpg" alt="Zeichnung Spray" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Wayne Rooney Footballer" data-name="wayne_rooney_footballer"><img src="{{ STATIC_URL }}images/backgrounds/wayne_rooney_footballer_thumb.jpg" alt="Wayne Rooney Footballer" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Abstract Colorful Lines" data-name="abstract_colorful_lines"><img src="{{ STATIC_URL }}images/backgrounds/abstract_colorful_lines_thumb.jpg" alt="Abstract Colorful Lines" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Color Lines" data-name="color_lines"><img src="{{ STATIC_URL }}images/backgrounds/color_lines_thumb.jpg" alt="Color Lines" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Skyscraper World" data-name="skyscraper_world"><img src="{{ STATIC_URL }}images/backgrounds/skyscraper_world_thumb.jpg" alt="Skyscraper World" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Evening in the Alps" data-name="evening_in_the_alps"><img src="{{ STATIC_URL }}images/backgrounds/evening_in_the_alps_thumb.jpg" alt="Evening in the Alps" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Evening Reflections" data-name="evening_reflections"><img src="{{ STATIC_URL }}images/backgrounds/evening_reflections_thumb.jpg" alt="Evening Reflections" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="The London eye at Night" data-name="the_london_eye_at_night"><img src="{{ STATIC_URL }}images/backgrounds/the_london_eye_at_night_thumb.jpg" alt="The London eye at Night" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Pizza" data-name="pizza"><img src="{{ STATIC_URL }}images/backgrounds/pizza_thumb.jpg" alt="Pizza" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Romantic Atmosphere" data-name="romantic_atmosphere"><img src="{{ STATIC_URL }}images/backgrounds/romantic_atmosphere_thumb.jpg" alt="Romantic Atmosphere" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="New York City" data-name="new_york_city"><img src="{{ STATIC_URL }}images/backgrounds/new_york_city_thumb.jpg" alt="New York City" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Kitty" data-name="kitty"><img src="{{ STATIC_URL }}images/backgrounds/kitty_thumb.jpg" alt="Kitty" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Forest Path Summer" data-name="forest_path_summer"><img src="{{ STATIC_URL }}images/backgrounds/forest_path_summer_thumb.jpg" alt="Forest Path Summer" /></a></li>
+						<li><a href="#" class="background" data-toggle="tooltip" title="Emirates Stadium Sports" data-name="emirates_stadium_sports"><img src="{{ STATIC_URL }}images/backgrounds/emirates_stadium_sports_thumb.jpg" alt="Emirates Stadium Sports" /></a></li>
+					</ul>
+				</div>
+				<!-- End Backgrounds -->
+				<!-- Predefined -->
+				<div class="styles">
+					<h6>20 Predefined Color Skins <span class="default"><i class="icon-cog"></i> Default</span></h6>
+					<ul class="unstyled inline">
+						<li><a href="#" data-toggle="tooltip" title="Default" data-name="default"><img src="{{ STATIC_URL }}images/demo/skins/default.png" alt="Default" class="active" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Dark" data-name="dark"><img src="{{ STATIC_URL }}images/demo/skins/dark.png" alt="Dark" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Food" data-name="food"><img src="{{ STATIC_URL }}images/demo/skins/food.png" alt="Food" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="News" data-name="news"><img src="{{ STATIC_URL }}images/demo/skins/news.png" alt="News" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Sport" data-name="sport"><img src="{{ STATIC_URL }}images/demo/skins/sport.png" alt="Sport" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Yellow" data-name="yellow"><img src="{{ STATIC_URL }}images/demo/skins/yellow.png" alt="Yellow" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Blue" data-name="blue"><img src="{{ STATIC_URL }}images/demo/skins/blue.png" alt="Blue" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Brown" data-name="brown"><img src="{{ STATIC_URL }}images/demo/skins/brown.png" alt="Brown" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Cyan" data-name="cyan"><img src="{{ STATIC_URL }}images/demo/skins/cyan.png" alt="Cyan" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Green" data-name="green"><img src="{{ STATIC_URL }}images/demo/skins/green.png" alt="Green" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Orange" data-name="orange"><img src="{{ STATIC_URL }}images/demo/skins/orange.png" alt="Orange" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Pink" data-name="pink"><img src="{{ STATIC_URL }}images/demo/skins/pink.png" alt="Pink" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Purple" data-name="purple"><img src="{{ STATIC_URL }}images/demo/skins/purple.png" alt="Purple" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Red" data-name="red"><img src="{{ STATIC_URL }}images/demo/skins/red.png" alt="Red" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="White" data-name="white"><img src="{{ STATIC_URL }}images/demo/skins/white.png" alt="White" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Sky" data-name="sky"><img src="{{ STATIC_URL }}images/demo/skins/sky.png" alt="Sky" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Forest" data-name="forest"><img src="{{ STATIC_URL }}images/demo/skins/forest.png" alt="Forest" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Violet" data-name="violet"><img src="{{ STATIC_URL }}images/demo/skins/violet.png" alt="Violet" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Old" data-name="old"><img src="{{ STATIC_URL }}images/demo/skins/old.png" alt="Old" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Night" data-name="night"><img src="{{ STATIC_URL }}images/demo/skins/night.png" alt="Night" /></a></li>
+					</ul>
+				</div>
+				<!-- End Predefined -->
+				<!-- Menus -->
+				<div class="menus">
+					<h6>20 Menu Colors <span class="default"><i class="icon-cog"></i> Default</span></h6>
+					<ul class="unstyled inline">
+						<li><a href="#" data-toggle="tooltip" title="Cyan" data-name="cyan"><img src="{{ STATIC_URL }}images/demo/menus/cyan.png" alt="Cyan" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Steel Blue" data-name="steel-blue"><img src="{{ STATIC_URL }}images/demo/menus/steel-blue.png" alt="Steel Blue" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Blue" data-name="blue"><img src="{{ STATIC_URL }}images/demo/menus/blue.png" alt="Blue" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Purple" data-name="purple"><img src="{{ STATIC_URL }}images/demo/menus/purple.png" alt="Purple" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Violet" data-name="violet"><img src="{{ STATIC_URL }}images/demo/menus/violet.png" alt="Violet" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Olive" data-name="olive"><img src="{{ STATIC_URL }}images/demo/menus/olive.png" alt="Olive" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Green" data-name="green"><img src="{{ STATIC_URL }}images/demo/menus/green.png" alt="Green" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Leaf" data-name="leaf"><img src="{{ STATIC_URL }}images/demo/menus/leaf.png" alt="Leaf" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Yellow" data-name="yellow"><img src="{{ STATIC_URL }}images/demo/menus/yellow.png" alt="Yellow" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Dark Yellow" data-name="dark-yellow"><img src="{{ STATIC_URL }}images/demo/menus/dark-yellow.png" alt="Dark Yellow" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Orange" data-name="orange"><img src="{{ STATIC_URL }}images/demo/menus/orange.png" alt="Orange" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Pumpkin" data-name="pumpkin"><img src="{{ STATIC_URL }}images/demo/menus/pumpkin.png" alt="Pumpkin" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Rose" data-name="rose"><img src="{{ STATIC_URL }}images/demo/menus/rose.png" alt="Rose" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Pink" data-name="pink"><img src="{{ STATIC_URL }}images/demo/menus/pink.png" alt="Pink" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Red" data-name="red"><img src="{{ STATIC_URL }}images/demo/menus/red.png" alt="Red" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Brown Light" data-name="brown-light"><img src="{{ STATIC_URL }}images/demo/menus/brown-light.png" alt="Brown Light" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Brown" data-name="brown"><img src="{{ STATIC_URL }}images/demo/menus/brown.png" alt="Brown" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="White" data-name="white"><img src="{{ STATIC_URL }}images/demo/menus/white.png" alt="White" class="active" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Gray" data-name="gray"><img src="{{ STATIC_URL }}images/demo/menus/gray.png" alt="Gray" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Black" data-name="black"><img src="{{ STATIC_URL }}images/demo/menus/black.png" alt="Black" /></a></li>
+					</ul>
+				</div>
+				<!-- End Menu -->
+				<!-- Headers -->
+				<div class="headers">
+					<h6>40 Headers Background <span class="remove"><i class="icon-remove"></i> Remove</span></h6>
+					<ul class="unstyled inline">
+						<li><a href="#" data-toggle="tooltip" title="Header 1" data-name="1"><img src="{{ STATIC_URL }}images/demo/headers/1.png" alt="Header 1" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 2" data-name="2"><img src="{{ STATIC_URL }}images/demo/headers/2.png" alt="Header 2" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 3" data-name="3"><img src="{{ STATIC_URL }}images/demo/headers/3.png" alt="Header 3" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 4" data-name="4"><img src="{{ STATIC_URL }}images/demo/headers/4.png" alt="Header 4" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 5" data-name="5"><img src="{{ STATIC_URL }}images/demo/headers/5.png" alt="Header 5" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 6" data-name="6"><img src="{{ STATIC_URL }}images/demo/headers/6.png" alt="Header 6" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 7" data-name="7"><img src="{{ STATIC_URL }}images/demo/headers/7.png" alt="Header 7" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 8" data-name="8"><img src="{{ STATIC_URL }}images/demo/headers/8.png" alt="Header 8" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 9" data-name="9"><img src="{{ STATIC_URL }}images/demo/headers/9.png" alt="Header 9" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 10" data-name="10"><img src="{{ STATIC_URL }}images/demo/headers/10.png" alt="Header 10" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 11" data-name="11"><img src="{{ STATIC_URL }}images/demo/headers/11.png" alt="Header 11" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 12" data-name="12"><img src="{{ STATIC_URL }}images/demo/headers/12.png" alt="Header 12" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 13" data-name="13"><img src="{{ STATIC_URL }}images/demo/headers/13.png" alt="Header 13" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 14" data-name="14"><img src="{{ STATIC_URL }}images/demo/headers/14.png" alt="Header 14" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 15" data-name="15"><img src="{{ STATIC_URL }}images/demo/headers/15.png" alt="Header 15" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 16" data-name="16"><img src="{{ STATIC_URL }}images/demo/headers/16.png" alt="Header 16" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 17" data-name="17"><img src="{{ STATIC_URL }}images/demo/headers/17.png" alt="Header 17" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 18" data-name="18"><img src="{{ STATIC_URL }}images/demo/headers/18.png" alt="Header 18" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 19" data-name="19"><img src="{{ STATIC_URL }}images/demo/headers/19.png" alt="Header 19" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 20" data-name="20"><img src="{{ STATIC_URL }}images/demo/headers/20.png" alt="Header 20" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 21" data-name="21"><img src="{{ STATIC_URL }}images/demo/headers/21.png" alt="Header 21" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 22" data-name="22"><img src="{{ STATIC_URL }}images/demo/headers/22.png" alt="Header 22" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 23" data-name="23"><img src="{{ STATIC_URL }}images/demo/headers/23.png" alt="Header 23" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 24" data-name="24"><img src="{{ STATIC_URL }}images/demo/headers/24.png" alt="Header 24" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 25" data-name="25"><img src="{{ STATIC_URL }}images/demo/headers/25.png" alt="Header 25" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 26" data-name="26"><img src="{{ STATIC_URL }}images/demo/headers/26.png" alt="Header 26" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 27" data-name="27"><img src="{{ STATIC_URL }}images/demo/headers/27.png" alt="Header 27" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 28" data-name="28"><img src="{{ STATIC_URL }}images/demo/headers/28.png" alt="Header 28" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 29" data-name="29"><img src="{{ STATIC_URL }}images/demo/headers/29.png" alt="Header 29" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 30" data-name="30"><img src="{{ STATIC_URL }}images/demo/headers/30.png" alt="Header 30" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 31" data-name="31"><img src="{{ STATIC_URL }}images/demo/headers/31.png" alt="Header 31" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 32" data-name="32"><img src="{{ STATIC_URL }}images/demo/headers/32.png" alt="Header 32" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 33" data-name="33"><img src="{{ STATIC_URL }}images/demo/headers/33.png" alt="Header 33" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 34" data-name="34"><img src="{{ STATIC_URL }}images/demo/headers/34.png" alt="Header 34" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 35" data-name="35"><img src="{{ STATIC_URL }}images/demo/headers/35.png" alt="Header 35" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 36" data-name="36"><img src="{{ STATIC_URL }}images/demo/headers/36.png" alt="Header 36" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 37" data-name="37"><img src="{{ STATIC_URL }}images/demo/headers/37.png" alt="Header 37" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 38" data-name="38"><img src="{{ STATIC_URL }}images/demo/headers/38.png" alt="Header 38" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 39" data-name="39"><img src="{{ STATIC_URL }}images/demo/headers/39.png" alt="Header 39" /></a></li>
+						<li><a href="#" data-toggle="tooltip" title="Header 40" data-name="40"><img src="{{ STATIC_URL }}images/demo/headers/40.png" alt="Header 40" /></a></li>
+					</ul>
+				</div>
+				<!-- End Headers -->
+				<!-- Font -->
+				<div class="fonts">
+					<h6>Google Fonts <span class="default"><i class="icon-cog"></i> Default</span></h6>
+					<select name="fonts">
+						<option value="Open Sans" data-family="Open+Sans:400,400italic,300,600,700">Open Sans</option>
+						<option value="Lato" data-family="Lato:400,700,400italic,900">Lato</option>
+						<option value="Lora" data-family="Lora:400,400italic,700">Lora</option>
+						<option value="Vollkorn" data-family="Vollkorn:400italic,700,400">Vollkorn</option>
+						<option value="Ubuntu" data-family="Ubuntu:400,400italic,500,700">Ubuntu</option>
+						<option value="Droid Sans" data-family="Droid+Sans:400,700">Droid Sans</option>
+						<option value="Prociono" data-family="Prociono">Prociono</option>
+						<option value="Merriweather" data-family="Merriweather:400,700">Merriweather</option>
+						<option value="Bitter" data-family="Bitter:400,400italic,700">Bitter</option>
+						<option value="Kreon" data-family="Kreon:400,700">Kreon</option>
+						<option value="Droid Serif" data-family="Droid+Serif:400,700,400italic">Droid Serif</option>
+						<option value="Raleway" data-family="Raleway:400,600">Raleway</option>
+						<option value="Quicksand" data-family="Quicksand:400,700">Quicksand</option>
+						<option value="Oswald" data-family="Oswald:400,700,300">Oswald</option>
+						<option value="Arvo" data-family="Arvo:400,400italic,700">Arvo</option>
+						<option value="Source Sans Pro" data-family="Source+Sans+Pro:400,400italic,600,700,900">Source Sans Pro</option>
+					</select>
+				</div>
+				<!-- End Font -->
+			</div>
+			<div class="toggle toggle-close"><i class="icon-remove"></i></div>
+			<div class="toggle toggle-open" style="display:none;"><i class="icon-beaker"></i></div>
+		</div>
+		<!-- End Style Switcher -->
+	{% endblock body_switcher %}
+	{% block body_scripts %}
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.easing.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}css/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}css/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var tpj = jQuery;
+			tpj.noConflict();
 
-<div id="footer-line" class="container">
-    <div class="row">
-    <div class="span6">
-    {% include "includes/footer_text.html" %}
-    </div>
-    <div id="footer-powered" class="span6">
-    {% include "includes/footer_powered.html" %}
-    <a onclick="scrollToTop();return false;" href="#"><i class="icon-arrow-up"></i></a>
-    </div>
-    </div>
-</div>
+			tpj(document).ready(function () {
+				if (tpj.fn.cssOriginal != undefined)
+					tpj.fn.css = tpj.fn.cssOriginal;
 
-<div id="footer" class="container">
-    {% page_menu "pages/menus/footer.html" %}
-</div>
+				tpj('.fullwidthbanner').revolution({
+					delay: 9000,
+					startwidth: 1020,
+					startheight: 400,
 
-{% include "includes/footer_scripts.html" %}
+					onHoverStop: "on", // Stop Banner Timet at Hover on Slide on/off
 
+					thumbWidth: 100, // Thumb With and Height and Amount (only if navigation Tyope set to thumb !)
+					thumbHeight: 50,
+					thumbAmount: 3,
+
+					hideThumbs: 0,
+					navigationType: "none", // bullet, thumb, none
+					navigationArrows: "solo", // nexttobullets, solo (old name verticalcentered), none
+
+					navigationStyle: "round", // round,square,navbar,round-old,square-old,navbar-old, or any from the list in the docu (choose between 50+ different item), custom
+
+					navigationHAlign: "left", // Vertical Align top,center,bottom
+					navigationVAlign: "bottom", // Horizontal Align left,center,right
+					navigationHOffset: 30,
+					navigationVOffset: 30,
+
+					soloArrowLeftHalign: "left",
+					soloArrowLeftValign: "center",
+					soloArrowLeftHOffset: 20,
+					soloArrowLeftVOffset: 0,
+
+					soloArrowRightHalign: "right",
+					soloArrowRightValign: "center",
+					soloArrowRightHOffset: 20,
+					soloArrowRightVOffset: 0,
+
+					touchenabled: "on", // Enable Swipe Function : on/off
+
+					stopAtSlide: -1, // Stop Timer if Slide "x" has been Reached. If stopAfterLoops set to 0, then it stops already in the first Loop at slide X which defined. -1 means do not stop at any slide. stopAfterLoops has no sinn in this case.
+					stopAfterLoops: -1, // Stop Timer if All slides has been played "x" times. IT will stop at THe slide which is defined via stopAtSlide:x, if set to -1 slide never stop automatic
+
+					hideCaptionAtLimit: 0, // It Defines if a caption should be shown under a Screen Resolution ( Basod on The Width of Browser)
+					hideAllCaptionAtLilmit: 0, // Hide all The Captions if Width of Browser is less then this value
+					hideSliderAtLimit: 0, // Hide the whole slider, and stop also functions if Width of Browser is less than this value
+
+					fullWidth: "on",
+
+					shadow: 0 //0 = no Shadow, 1,2,3 = 3 Different Art of Shadows -  (No Shadow in Fullwidth Version !)
+				});
+			});
+			/* ]]> */
+		</script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.jcarousel.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.flexslider.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.parallax.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			jQuery.noConflict();
+
+			(function ($) {
+				$(function () {
+					$(window).on('resize', function() {
+						if (Modernizr.mq('screen and (min-width: 768px)')) {
+							// .parallax(xPosition, speedFactor, outerHeight) options:
+							// xPosition - Horizontal position of the element
+							// inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+							// outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+							$('.boxes').parallax('50%', 0.4);
+						}
+					}).resize();
+				});
+			})(jQuery);
+			/* ]]> */
+		</script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.waypoints.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.fitvids.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.prettyPhoto.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.cookie.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.qrcode.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			jQuery.noConflict();
+
+			(function ($) {
+				$(function () {
+					if (Modernizr.canvas) {
+						$('#qrcode').qrcode({
+							width: 100,
+							height: 100,
+							text: 'http://themes.atomtech.com.br/citynightlife/html'
+						});
+					}
+				});
+			})(jQuery);
+			/* ]]> */
+		</script>
+		<!--[if lte IE 9]>
+			<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.placeholder.min.js"></script>
+			<script type="text/javascript">
+				/* <![CDATA[ */
+				jQuery.noConflict();
+
+				(function ($) {
+					$(function () {
+						// Placeholder
+						$('input, textarea').placeholder();
+					});
+				})(jQuery);
+				/* ]]> */
+			</script>
+			<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.menu.min.js"></script>
+			<script type="text/javascript">
+				/* <![CDATA[ */
+				jQuery.noConflict();
+
+				(function ($) {
+					$(function () {
+						// Menu effect
+						$('#nav .menu').menu({'effect' : 'fade'});
+					});
+				})(jQuery);
+				/* ]]> */
+			</script>
+		<![endif]-->
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery.style-switcher.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/effects.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/plugins.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
+		<script type="text/javascript">
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-40243398-1', 'atomtech.com.br');
+			ga('send', 'pageview');
+		</script>
+	{% endblock body_scripts %}
+    {% block body_scripts_extras %}
+    {% endblock body_scripts_extras %}
 </body>
+{% endblock body %}
+
 </html>

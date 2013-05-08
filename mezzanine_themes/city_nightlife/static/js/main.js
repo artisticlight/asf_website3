@@ -76,7 +76,7 @@
 		init: function() {
 			// Ticker Footer
 			$('#ticker').tweet({
-				username: 'envato', // Change here the username of twitter
+				username: 'Ak_Satellite', // Change here the username of twitter
 				page: 1,
 				count: 5,
 				template: '<span class="label"><i class="icon-twitter"></i> Twitter</span> {time} {text}'
@@ -95,7 +95,7 @@
 
 			// Twitter Widget
 			$('.twitter-widget').tweet({
-				username: 'envato', // Change here the username of twitter
+				username: 'Ak_Satellite', // Change here the username of twitter
 				join_text: 'auto',
 				avatar_size: 35,
 				count: 3,
