@@ -8,5 +8,5 @@
 {% trans "Theme by" %} <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
 {% ifinstalled mezzanine.mobile %}
 <span class="separator">|</span>
-<a href="{% url set_device "mobile" %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>
+<a href="{% url "set_device" "mobile" %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>
 {% endifinstalled %}

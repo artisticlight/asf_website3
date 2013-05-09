@@ -292,10 +292,10 @@ PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
 
 # Tell mezzanine-flexipage what your flexi templates are (start.html comes with the package)
 FLEXI_TEMPLATES = (
-     ('start.html','start'),
-     ('index.html','index'),
+     ('../index.html','index'),
      ('layout1.html','layout1'),
      ('layout2.html','layout2'),
+     ('layout3.html','layout3'),
  )
 
 #########################

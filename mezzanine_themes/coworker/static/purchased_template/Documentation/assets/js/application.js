@@ -121,7 +121,7 @@
 
 // Modified from the original jsonpi https://github.com/benvinegar/jquery-jsonpi
 $.ajaxTransport('jsonpi', function(opts, originalOptions, jqXHR) {
-  var url = opts.url;
+  var url "=" opts.url;
 
   return {
     send: function(_, completeCallback) {

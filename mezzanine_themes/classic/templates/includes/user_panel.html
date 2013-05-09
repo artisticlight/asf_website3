@@ -11,10 +11,10 @@
     {% ifinstalled cartridge.shop %}
         {% load shop_tags %}
         {% with request.cart.total_quantity as cart_quantity %}
-        <a href="{% url shop_cart %}">{% trans "My Cart" %} 
+        <a href="{% url "shop_cart" %}">{% trans "My Cart" %} 
         ({% if cart_quantity %}{{ cart_quantity }}{% else %}0{% endif %})</a> | 
         {% endwith %}
-        <a href="{% url shop_wishlist %}">{% trans "My Wishlist" %} 
+        <a href="{% url "shop_wishlist" %}">{% trans "My Wishlist" %} 
         {% with request.wishlist|length as wishlist_count %}
         ({% if wishlist_count %}{{ wishlist_count }}{% else %}0{% endif %})</a>
         {% endwith %}

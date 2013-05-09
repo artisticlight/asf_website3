@@ -226,7 +226,7 @@ function _recaptcha_mailhide_urlbase64 ($x) {
 	return strtr(base64_encode ($x), '+/', '-_');
 }
 
-/* gets the reCAPTCHA Mailhide url for a given email, public key and private key */
+/* gets the reCAPTCHA Mailhide url "for" a given email, public key and private key */
 function recaptcha_mailhide_url($pubkey, $privkey, $email) {
 	if ($pubkey == '' || $pubkey == null || $privkey == "" || $privkey == null) {
 		die ("To use reCAPTCHA Mailhide, you have to sign up for a public and private key, " .

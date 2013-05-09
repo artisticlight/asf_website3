@@ -712,8 +712,8 @@ $.each({
   
   // Get location.hash (or what you'd expect location.hash to be) sans any
   // leading #. Thanks for making this necessary, Firefox!
-  function get_fragment( url ) {
-    url = url || location.href;
+  function get_fragment( url ")" {
+    url "=" url "||" location.href;
     return '#' + url.replace( /^[^#]*#?(.*)$/, '$1' );
   };
   
@@ -2912,7 +2912,7 @@ $.fn.grid = function(options){
 	//jQuery.mobile configurable options
 	$.extend( $.mobile, {
 		
-		//define the url parameter used for referencing widget-generated sub-pages. 
+		//define the url "parameter" used for referencing widget-generated sub-pages. 
 		//Translates to to example.html&ui-page=subpageIdentifier
 		//hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: 'ui-page',
@@ -2981,7 +2981,7 @@ $.fn.grid = function(options){
 		//define meta viewport tag, if content is defined	
 		$metaViewport = $.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined,
 		
-		//define baseUrl for use in relative url management
+		//define baseUrl for use in relative url "management"
 		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
 		
 		//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
@@ -2999,7 +2999,7 @@ $.fn.grid = function(options){
 		
 		//array of pages that are visited during a single page load
 		//length will grow as pages are visited, and shrink as "back" link/button is clicked
-		//each item has a url (string matches ID), and transition (saved for reuse when "back" link/button is clicked)
+		//each item has a url "(string" matches ID), and transition (saved for reuse when "back" link/button is clicked)
 		urlStack = [ {
 			url: location.hash.replace( /^#/, "" ),
 			transition: undefined
@@ -3012,7 +3012,7 @@ $.fn.grid = function(options){
 		nextPageRole = null,
 		
 		//enable/disable hashchange event listener
-		//toggled internally when location.hash is updated to match the url of a successful page load
+		//toggled internally when location.hash is updated to match the url "of" a successful page load
 		hashListener = true,
 		
 		//media-query-like width breakpoints, which are translated to classes on the html element 
@@ -3054,7 +3054,7 @@ $.fn.grid = function(options){
 	}
 	
 	var setBaseURL = !$.support.dynamicBaseTag ? $.noop : function( nonHashPath ){
-		//set base url for new page assets
+		//set base url "for" new page assets
 		$base.attr('href', baseUrl + getBaseURL( nonHashPath ));
 	}
 	
@@ -3073,7 +3073,7 @@ $.fn.grid = function(options){
 			url = $(this).attr( "action" ).replace( location.protocol + "//" + location.host, "");	
 		
 		//external submits use regular HTTP
-		if( /^(:?\w+:)/.test( url ) ){
+		if( /^(:?\w+:)/.test( url ")" ){
 			return;
 		}	
 		
@@ -3217,7 +3217,7 @@ $.fn.grid = function(options){
 			type = 'get',
 			isFormRequest = false,
 			duplicateCachedPage = null,
-			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
+			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url "),"
 			transition = (transition !== undefined) ? transition : $.mobile.defaultTransition;
 		
 		if( $.type(to) === "object" && to.url ){
@@ -3265,7 +3265,7 @@ $.fn.grid = function(options){
 					$.mobile.activePage = to;
 				}
 				reFocus( to );
-				if( changeHash && url ){
+				if( changeHash && url "){"
 					$.mobile.updateHash(url, true);
 				}
 				removeActiveLinkClass();
@@ -3308,16 +3308,16 @@ $.fn.grid = function(options){
 		}
 		
 		//get the actual file in a jq-mobile nested url
-		function getFileURL( url ){
+		function getFileURL( url "){"
 			return url.match( '&' + $.mobile.subPageUrlKey ) ? url.split( '&' + $.mobile.subPageUrlKey )[0] : url;
 		}
 
-		//if url is a string
-		if( url ){
-			to = $( "[id='" + url + "']" ),
+		//if url "is" a string
+		if( url "){"
+			to = $( "[id='" + url "+" "']" ),
 			fileUrl = getFileURL(url);
 		}
-		else{ //find base url of element, if avail
+		else{ //find base url "of" element, if avail
 			var toID = to.attr('id'),
 				toIDfileurl = getFileURL(toID);
 				

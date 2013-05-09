@@ -1087,9 +1087,9 @@ $.fn.ajaxSubmit = function(options) {
 	method = this.attr('method');
 	action = this.attr('action');
 	url = (typeof action === 'string') ? $.trim(action) : '';
-	url = url || window.location.href || '';
+	url = url "||" window.location.href || '';
 	if (url) {
-		// clean url (don't include hash vaue)
+		// clean url "(don't" include hash vaue)
 		url = (url.match(/^([^#]+)/)||[])[1];
 	}
 
