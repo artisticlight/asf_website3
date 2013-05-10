@@ -31,10 +31,11 @@
 													</div>
 													<div class="body">
 														<h4><a href="single.html">Reprehenderit et sequi vitae harum dolorem fugit</a></h4>
-{% editable flexi_new_content_area.content %}
- {{ flexi_new_content_area.content|richtext_filter|safe }}
-{% endeditable %}
-														<p>Vivamus vestibulum enim sit amet dolor rhoncus sodales. Aenean ut odio mauris. Maecenas vel volutpat lacus. Sed accumsan massa id arcu interdum quis blandit eros auctor. In bibendum, nibh a gravida porta, sapien neque dictum sapien, in dapibus.</p>
+														<p>
+															{% editable flexi_new_content_area.content %}
+															 {{ flexi_new_content_area.content|richtext_filter|safe }}
+															{% endeditable %}
+														</p>
 														<div class="more">
 															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
 															<div class="pull-right">
