@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n mezzanine_tags %}
+{% load mezzanine_tags i18n %}
 
 		{% block body_main %}
 			<div class="main">
@@ -10,243 +10,32 @@
 							<!-- Content -->
 							<div class="content">
 								<div class="page-header">
+									<h2><a href="blog.html"><i class="icon-calendar"></i> <span>SAR</span> Images</a></h2>
+								</div>
+								<ul class="thumbnails gallery">
+									{% with page.gallery.images.all as images %}
+									{% for image in images %}
+									<li>
+									    <a class="thumbnail" rel="#image-{{ image.id }}" title="{{ image.description }}" href="{{ MEDIA_URL }}{{ image.file }}">
+									        <img class="image-overlay-thumb" src="{{ MEDIA_URL }}{% thumbnail image.file 75 75 %}">
+									    </a>
+									    <div id="image-{{ image.id }}" class="image-overlay" style="display:none;">
+									        <a href="#" class="image-overlay-prev">&larr;</a>
+									        <a href="#" class="image-overlay-next">&rarr;</a>
+									        <img class="image-overlay-full" src="{{ MEDIA_URL }}{% thumbnail image.file 0 600 %}"><br>
+									        <p>{{ image.description }}<br>{{ forloop.counter }} / {{ images|length }}</p>
+									    </div>
+									</li>
+									{% endfor %}
+									{% endwith %}
+								</ul>
+								<hr class="dotted hidden-phone">
+								<div class="page-header">
 									<h2><a href="blog.html"><i class="icon-calendar"></i> <span>Upcoming</span> Events</a></h2>
 								</div>
-								<!-- Upcoming Events -->
-								<section>
-									<div id="upcoming-jcarousel" class="upcoming-jcarousel jcarousel" data-auto="5">
-										<ul class="events unstyled">
-											<li>
-												<article>
-													<figure>
-														<span class="ribbon"></span>
-														<span class="ribbon_icon"><i class="icon-star"></i></span>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-picture"></i> Picture</small>
-														<div class="pull-right">
-															<small>April 13th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Reprehenderit et sequi vitae harum dolorem fugit</a></h4>
-														<p>
-															{% editable flexi_new_content_area.content %}
-															 {{ flexi_new_content_area.content|richtext_filter|safe }}
-															{% endeditable %}
-														</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 14</a>
-																<a href="single.html"><i class="icon-heart"></i> 122</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-											<li>
-												<article>
-													<figure>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-play-circle"></i> Video</small>
-														<div class="pull-right">
-															<small>April 13th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Voluptates consectetur voluptatem obcaecati</a></h4>
-														<p>Suspendisse potenti. Aenean felis arcu, suscipit vitae pulvinar interdum, dictum at augue. Nulla ultricies massa viverra tortor rutrum et condimentum leo consectetur. Sed placerat augue eu eros ultrices sodales. Nullam aliquet ultrices velit ut luctus.</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 48</a>
-																<a href="single.html"><i class="icon-heart"></i> 89</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-											<li>
-												<article>
-													<figure>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-music"></i> Music</small>
-														<div class="pull-right">
-															<small>April 13th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Laudantium nulla fugit iusto obcaecati nisi.</a></h4>
-														<p>Sed sed arcu sed sem consequat ultri-cies vitae sit amet ipsum. Curabitur quis diam sapien, et ornare felis. In eu mollis tellus. Sed et hendrerit ipsum. Nulla tincidunt lacus ut mi viverra fringilla. Nulla hendrerit suscipit massa et condimentum.</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 133</a>
-																<a href="single.html"><i class="icon-heart"></i> 17</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-											<li>
-												<article>
-													<figure>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-picture"></i> Picture</small>
-														<div class="pull-right">
-															<small>April 13th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Natus consectetur accusamus error repudiandae</a></h4>
-														<p>Impedit labore quis reiciendis fugit molestiae quidem iste beatae ratione reprehenderit blanditiis veritatis modi maiores voluptate atque ullam vero autem quisquam libero dolorem magnam saepe alias debitis perferendis minima quas quod.</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 123</a>
-																<a href="single.html"><i class="icon-heart"></i> 26</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-											<li>
-												<article>
-													<figure>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-play-circle"></i> Video</small>
-														<div class="pull-right">
-															<small>April 13th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Reprehenderit necessitatibus unde officiis ullam</a></h4>
-														<p>Sit reprehenderit perspiciatis modi rerum ex eaque itaque harum praesentium asperiores quia laboriosam odit enim fuga voluptas necessitatibus explicabo laudantium illo dolor voluptates expedita tempora vel est cumque tenetur eos fugiat eveniet.</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 9</a>
-																<a href="single.html"><i class="icon-heart"></i> 48</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-											<li>
-												<article>
-													<figure>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-picture"></i> Picture</small>
-														<div class="pull-right">
-															<small>April 13th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Praesentium cumque accusantium voluptatem</a></h4>
-														<p>Aperiam autem minima quod labore aspernatur aliquid maxime! Aliquid sint modi in consequuntur quia sequi non unde nesciunt quidem. Quaerat dolor esse eaque sit odit deleniti voluptate vel eligendi deserunt labore maiores modi eveniet.</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 2</a>
-																<a href="single.html"><i class="icon-heart"></i> 28</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-											<li>
-												<article>
-													<figure>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-music"></i> Music</small>
-														<div class="pull-right">
-															<small>April 13th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Delectus ipsam libero ipsa ipsum fuga possimus</a></h4>
-														<p>Expedita facere quibusdam consequuntur minus qui soluta iure. Sunt autem magnam dolor voluptatum veritatis aspernatur aliquid quasi earum provident fugit ipsum numquam eos non beatae impedit laboriosam tempore adipisci corporis.</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 99</a>
-																<a href="single.html"><i class="icon-heart"></i> 23</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-											<li>
-												<article>
-													<figure>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-play-circle"></i> Video</small>
-														<div class="pull-right">
-															<small>April 18th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Fugiat blanditiis modi temporibus unde earum</a></h4>
-														<p>Neque iste eius aliquid id pariatur possimus nulla itaque expedita maiores error autem voluptatum deleniti necessitatibus. Possimus quae aperiam aut aliquam ducimus molestiae in quia ipsa necessitatibus cupiditate nisi hic tempore?</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 13</a>
-																<a href="single.html"><i class="icon-heart"></i> 62</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-											<li>
-												<article>
-													<figure>
-														<a href="single.html"><img src="http://placehold.it/238x160" alt="" /></a>
-													</figure>
-													<div class="date">
-														<small><i class="icon-picture"></i> Picture</small>
-														<div class="pull-right">
-															<small>April 26th, 2013</small>
-														</div>
-													</div>
-													<div class="body">
-														<h4><a href="single.html">Suscipit fugiat cupiditate sit cum distinctio facilis</a></h4>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam ab id nobis quis minus dicta tempore sequi fugit ullam vel. Dolores rerum officia omnis eum in aliquam accusantium sequi unde magnam cum id voluptatem perferendis atque ipsum!</p>
-														<div class="more">
-															<a href="single.html"><i class="icon-circle-arrow-right"></i> <span class="hidden-tablet">Read more</span></a>
-															<div class="pull-right">
-																<a href="single.html"><i class="icon-comments"></i> 25</a>
-																<a href="single.html"><i class="icon-heart"></i> 79</a>
-															</div>
-														</div>
-													</div>
-												</article>
-											</li>
-										</ul>
-										<!-- <ul class="flex-direction-nav">
-											<li><a href="single.html" class="flex-prev flex-disabled"><i class="icon-chevron-left"></i></a></li>
-											<li><a href="single.html"><i class="icon-th"></i></a></li>
-											<li><a href="single.html" class="flex-next"><i class="icon-chevron-right"></i></a></li>
-										</ul> -->
-									</div>
-								</section>
-								<!-- End Upcoming Events -->
+								{% editable flexi_upcoming_events.content %}
+									{{ flexi_upcoming_events.content|richtext_filter|safe }}
+								{% endeditable %}
 								<hr class="dotted hidden-phone">
 								<!-- Blocks -->
 								<div class="column-posts">
@@ -742,7 +531,9 @@
 									<div class="newsletter newsletter-widget">
 										<div class="row-fluid">
 											<div class="span12">
-												<p>Join our mailing list and receive <strong>weekly highlights</strong> of the portal in your email.</p>
+												{% editable flexi_join_mailing_list.content %}
+													{{ flexi_join_mailing_list.content|richtext_filter|safe }}
+												{% endeditable %}
 												<form action="http://clickbrasilia.us6.list-manage.com/subscribe" method="get" accept-charset="utf-8">
 													<div class="input-prepend input-append">
 														<span class="add-on"><i class="icon-envelope"></i></span>
@@ -1060,7 +851,7 @@
 									<h2><i class="icon-camera-retro"></i> <span>Flickr</span> Photos</h2>
 									<!-- Flickr Widget -->
 									<div class="flickr-widget">
-										<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=8&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=52617155@N08"></script>
+										<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=8&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=89711667@N04"></script>
 									</div>
 									<!-- End Flickr Widget -->
 								</div>

@@ -427,7 +427,7 @@ header .access .form .control-group {
 /* Logo */
 header .logo {
   position: relative;
-  margin-top: 35px;
+  margin-top: 15px;
 }
 header .logo a {
   display: inline-block;
