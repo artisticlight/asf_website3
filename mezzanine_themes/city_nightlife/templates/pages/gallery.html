@@ -1,0 +1,95 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags %}
+
+{% block head_scripts_extras %}
+{{ block.super }}
+<script src="{{ STATIC_URL }}mezzanine/js/jquery.tools.toolbox.expose.js"></script>
+<script src="{{ STATIC_URL }}mezzanine/js/jquery.tools.overlay.js"></script>
+<script type="text/javascript">
+	jQuery.noConflict();
+	(function ($) {
+		$(function() {
+		    var close = 'img';
+		    var expose = {color: '#333', loadSpeed: 0, closeSpeed: 0, opacity: 0.9};
+		    var overlay = {
+		        expose: expose,
+		        close: close,
+		        onLoad: function() {$('.image-overlay').expose(expose);}
+		    }
+		    $('.gallery a[rel]').overlay(overlay).click(function() {
+		        location = $(this).attr('rel') + '-show';
+		    });
+		    $('.image-overlay-prev, .image-overlay-next').click(function() {
+		        var dir = $(this).attr('class').replace('image-overlay-', '');
+		        var to = $(this).parent().parent()[dir]();
+		        if (to.length == 0) {
+		            to = $('.gallery li:' + {prev: 'last', next: 'first'}[dir]);
+		        }
+		        $(this).parent().find(close).click();
+		        to.find('a:first').click();
+		        return false;
+		    });
+		    $('body').click(function(e) {
+		        var ignore = ['image-overlay-thumb', 'image-overlay-full', 'thumbnail'];
+		        var target = $(e.target);
+		        if ($.grep(ignore, function(name) {return target.hasClass(name)}).length == 0) {
+		            $('.image-overlay img:visible').click();
+		            location = '#';
+		        }
+		    });
+		    if (location.hash.indexOf('#image-') == 0) {
+		        $('a[rel=' + location.hash.replace('-show', '') + ']').click();
+		    }
+		});
+	})(jQuery);
+</script>
+
+{% endblock %}
+
+{% block body_slider %}
+{% endblock body_slider %}
+
+
+
+{% block main %}
+{{ block.super }}
+			<div class="main">
+				<div class="container">
+					<div class="row">
+						<div class="span8">
+							<!-- Content -->
+							<div class="content">
+								<div class="page-header">
+									<h2><i class="icon-camera-retro"></i> {% editable page.title %}{{ page.title }}{% endeditable %}</h2>
+								</div>
+
+								{% editable page.gallery.content %}
+								{{ page.gallery.content|richtext_filter|safe }}
+								{% endeditable %}
+
+								<ul class="thumbnails gallery">
+								{% with page.gallery.images.all as images %}
+								{% for image in images %}
+								<li>
+								    <a class="thumbnail" rel="#image-{{ image.id }}" title="{{ image.description }}" href="{{ MEDIA_URL }}{{ image.file }}">
+								        <img class="image-overlay-thumb" src="{{ MEDIA_URL }}{% thumbnail image.file 75 75 %}">
+								    </a>
+								    <div id="image-{{ image.id }}" class="image-overlay" style="display:none;">
+								        <a href="#" class="image-overlay-prev">&larr;</a>
+								        <a href="#" class="image-overlay-next">&rarr;</a>
+								        <img class="image-overlay-full" src="{{ MEDIA_URL }}{% thumbnail image.file 0 600 %}"><br>
+								        <p>{{ image.description }}<br>{{ forloop.counter }} / {{ images|length }}</p>
+								    </div>
+								</li>
+								{% endfor %}
+								{% endwith %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+{% endblock %}
+
+

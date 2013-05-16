@@ -500,6 +500,7 @@
 					</div>
 				</nav>
 				<!-- End Navigation -->
+				{% block body_slider %}
 				<div class="overall">
 					<div class="inner">
 						<div class="shadow-top"></div>
@@ -738,6 +739,7 @@
 						<!-- End Revolution Slider -->
 					</div>
 				</div>
+				{% endblock body_slider %}
 				<!-- Search -->
 				<div class="search">
 					<div class="container">
@@ -858,7 +860,7 @@
 							<div class="span3">
 								<!-- About us -->
 								<h3><i class="icon-book"></i> About Us</h3>
-								<p>The City Nightlife is a Premium Theme with HTML5, CSS3, jQuery, Sliders, Widgets working together to build your portal site, business site or personal site.</p>
+								<p>The Alaska Satellite Facility, downlinks, processes, archives, and distributes Synthetic Aperture Radar (SAR) data to scientific users around the world. Our mission is be the number one source of SAR data in the United States.</p>
 								<div class="count">
 									<div class="pull-left">
 										<h6><i class="icon-download"></i> Download</h6>
@@ -870,14 +872,14 @@
 									</div>
 								</div>
 								<address>
-									<strong>City Nightlife, Inc.</strong><br>
-									<i class="icon-map-marker"></i> 795 Folsom Ave, Suite 600<br>
-									San Francisco, CA 94107<br>
+									<strong>Alaska Satellite Facility</strong><br>
+									<i class="icon-map-marker"></i> 903 N Koyukuk Dr<br>
+									Fairbanks, AK 99775<br>
 								</address>
 
 								<address>
-									<i class="icon-phone"></i> (123) 456-7890<br>
-									<i class="icon-envelope-alt"></i> <a href="mailto:email@example.com">email@example.com</a>
+									<i class="icon-phone"></i> (907) 474-6166<br>
+									<i class="icon-envelope-alt"></i> <a href="mailto:uso@asf.alaska.edu">uso@asf.alaska.edu</a>
 								</address>
 								<!-- End About us -->
 							</div>
@@ -1127,7 +1129,15 @@
 			ga('send', 'pageview');
 		</script>
 	{% endblock body_scripts %}
+
     {% block body_scripts_extras %}
+	    {% if user.is_staff %}
+	    <script src="{{ STATIC_URL }}mezzanine/js/jquery-1.7.1.min.js">
+	        jQuery.noConflict();
+	    </script>
+		{% editable_loader %}
+		<script> jQuery.noConflict(true)</script>
+		{% endif %}
     {% endblock body_scripts_extras %}
 </body>
 {% endblock body %}
